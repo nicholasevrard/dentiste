@@ -80,6 +80,8 @@ L'importation de cette sauvegarde remplace des éléments de la base de données
 - Se connecter avec les identifiants par défaut.
 - Recréer son utilisateur administrateur.
 - Reconfigurer les paramètres de WordPress.
+- Recréer l'utilisateur principale et enlever celui qui a été mis par défault.
+- Changer le titre du site.
 
 ## Arrêt et suppression des services
 Si vous souhaitez arrêter WordPress et MariaDB :
