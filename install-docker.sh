@@ -28,3 +28,8 @@ if [ ! -e "./wordpress_data/wp-content/plugins/all-in-one-wp-migration/" ]; then
   sudo chmod 777 all-in-one-wp-migration
   sudo mv all-in-one-wp-migration ./wordpress_data/wp-content/plugins/
 fi
+
+if [ -e "./wordpress_data/wp-content/plugins/akismet/" ]; then
+  sudo rm -rf "./wordpress_data/wp-content/plugins/akismet/"
+  sudo rm "./wordpress_data/wp-content/plugins/hello.php"
+fi
