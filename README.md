@@ -53,6 +53,7 @@ docker ps
 ```
 
 ### 4. Accéder à WordPress
+Attendre quelques minutes pour que les services puissent démarrer.
 Ouvrez un navigateur et accédez à `http://<adresse_IP_du_serveur>`.
 Vous verrez l'interface d'installation de WordPress. Suivez les étapes pour configurer votre site.
 
