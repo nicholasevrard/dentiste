@@ -1,55 +1,92 @@
-Installation de WordPress et MariaDB avec Docker Compose
-Ce guide explique comment déployer WordPress et MariaDB sur une machine virtuelle (VM) VMware (https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion) nommée "dentiste" en utilisant Docker et Docker Compose.
-Prérequis
-1.	Docker et Docker Compose doivent être installés sur la machine virtuelle "dentiste". Assurez-vous que ces outils sont correctement installés avant de continuer. Si ce n'est pas déjà fait, vous pouvez suivre les instructions d'installation de Docker et Docker Compose disponibles sur leurs sites officiels (https://docs.docker.com/engine/install/ubuntu/).
-2.	VMware : La machine virtuelle "dentiste" doit être fonctionnelle et accessible via le terminal.
-3.	Accès à Internet : Un accès à Internet est nécessaire pour télécharger les images Docker de WordPress et MariaDB.
-Étapes d'installation
-1. Cloner ou copier le fichier docker-compose.yml
-Si vous disposez d'un dépôt Git contenant le fichier docker-compose.yml, clonez-le sur la machine "dentiste". Sinon, copiez simplement le fichier docker-compose.yml dans un répertoire approprié sur la machine.
-2. Vérifier le fichier docker-compose.yml
-Avant de démarrer les services, assurez-vous que le fichier docker-compose.yml contient les bonnes configurations. Ce fichier définit les services nécessaires pour faire fonctionner WordPress et MariaDB ensemble. Il contient des informations comme les paramètres de base de données et les volumes pour stocker les données de votre application.
-3. Lancer les services avec Docker Compose
-Utilisez Docker Compose pour démarrer les services définis dans le fichier docker-compose.yml. Cela va télécharger les images nécessaires, créer les conteneurs et démarrer WordPress ainsi que MariaDB.
-Les services seront lancés en arrière-plan, ce qui signifie que vous n'aurez pas besoin de garder le terminal ouvert.
-4. Vérification du déploiement
-Une fois les services démarrés, vérifiez qu'ils sont correctement en cours d'exécution. Docker Compose vous permet de vérifier l'état des conteneurs et des services, ainsi que les ports sur lesquels ils sont accessibles.
-5. Accéder à WordPress
-Après avoir lancé les services, ouvrez un navigateur et accédez à l'adresse de votre machine virtuelle "dentiste", en spécifiant le port sur lequel WordPress est exposé (par défaut, ce sera le port 8080).
-Vous devriez voir l'interface d'installation de WordPress. Suivez les instructions pour configurer votre site WordPress, choisir un nom de site, et créer un compte administrateur.
-6. Installer l'extension All-in-One WP Migration
-Cette extension permet d'importer et d'exporter des thèmes et du contenu WordPress facilement.
-1.	Se connecter à WordPress
-o	Accédez à l'interface d'administration de WordPress en ajoutant /wp-admin à l'adresse de votre site.
-o	Entrez votre identifiant et votre mot de passe administrateur.
-2.	Accéder à la gestion des extensions
-o	Dans le menu latéral, cliquez sur Extensions, puis sur Ajouter.
-3.	Rechercher et installer l'extension
-o	Dans la barre de recherche, tapez All-in-One WP Migration.
-o	Cliquez sur Installer maintenant, puis sur Activer une fois l'installation terminée.
-4.	Utiliser l'extension
-o	Un nouvel onglet All-in-One WP Migration apparaît dans le menu de WordPress.
-o	Vous pourrez alors importer ou exporter votre site.
-7. Importer un thème avec All-in-One WP Migration
-Si vous avez un fichier d’export contenant un thème personnalisé, suivez ces étapes :
-1.	Aller dans le menu All-in-One WP Migration
-o	Cliquez sur Importer.
-2.	Importer le fichier
-o	Cliquez sur Importer depuis, puis sélectionnez le fichier.wpress contenant votre site.
-3.	Démarrer l'importation
-o	Attendez que l'importation se termine.
-4.	Finaliser l'installation
-o	Reconnectez-vous à WordPress si nécessaire et vérifiez que le thème a bien été appliqué.
-8. Exporter un site WordPress
-Pour sauvegarder votre site ou le transférer vers un autre serveur :
-1.	Accéder à l'onglet Exporter
-o	Allez dans All-in-One WP Migration, puis cliquez sur Exporter.
-2.	Choisir le format d’exportation
-o	Cliquez sur Exporter vers, puis choisissez le format souhaité (par défaut, un fichier.wpress).
-3.	Télécharger le fichier
-o	Une fois l'export terminé, téléchargez le fichier pour l'utiliser ultérieurement.
-9. Arrêter les services
-Lorsque vous avez terminé avec WordPress, vous pouvez arrêter les services en utilisant Docker Compose. Cela arrêtera les conteneurs et libérera les ressources de votre machine.
-Les données de votre site WordPress et de la base de données seront conservées dans des volumes Docker, ce qui permet de les récupérer lors d'un prochain démarrage des services.
+# Déploiement de WordPress avec MariaDB via Docker Compose
 
+## Prérequis
+Avant de commencer, assurez-vous que votre serveur est prêt à accueillir l'installation de WordPress avec Docker.
+
+### 1. Configuration du serveur
+- Un serveur fonctionnel sous Linux (Ubuntu, Debian, CentOS, etc.).
+- Un accès administrateur via SSH.
+- Une connexion Internet active.
+
+### 2. Installation de Docker et Docker Compose
+Si Docker et Docker Compose ne sont pas encore installés sur votre serveur, suivez ces étapes :
+
+#### Méthode 1: Utilise le script bash install-docker.sh
+
+Lancer la commande suivante:
+```bash
+bash install-docker.sh
+```
+
+#### Méthode 2: Suivre la documentation officielle
+
+[Documentation Docker](https://docs.docker.com/engine/install/)
+
+Vérifiez l'installation :
+```bash
+docker --version
+docker compose version
+```
+
+**Attention**: la commande docker-compose n'est plus utilisée, veillez à ne pas mettre le tiret.
+
+## Déploiement de WordPress et MariaDB
+
+### 1. Vérifier la configuration de `docker-compose.yml`
+
+Dans le fichier `docker-compose.yml`, vérifier que les configurations sont celles attendues (ports, volumes, etc.)
+
+
+### 2. Lancer les services
+Dans le répertoire où se trouve `docker-compose.yml`, exécutez :
+
+```bash
+docker compose up -d
+```
+
+Cette commande télécharge les images nécessaires et démarre les conteneurs en arrière-plan.
+
+### 3. Vérification du déploiement
+Vérifiez que les conteneurs sont bien en cours d'exécution :
+```bash
+docker ps
+```
+
+### 4. Accéder à WordPress
+Ouvrez un navigateur et accédez à `http://<adresse_IP_du_serveur>`.
+Vous verrez l'interface d'installation de WordPress. Suivez les étapes pour configurer votre site.
+
+## Installation de l'extension `All-in-One WP Migration and Backup`
+
+Cette extension facilite l'importation et l'exportation des sites WordPress.
+
+### 1. Accéder à l'interface d'administration
+- Rendez-vous sur `http://<adresse_IP_du_serveur>/wp-admin`.
+- Connectez-vous avec votre compte administrateur.
+
+### 2. Installer l'extension
+- Dans le menu latéral, cliquez sur **Extensions** > **Ajouter**.
+- Recherchez **All-in-One WP Migration and Backup**.
+- Cliquez sur **Installer maintenant**, puis sur **Activer**.
+
+### 3. Importer un thème ou un site
+- Allez dans **All-in-One WP Migration and Backup** > **Importer**.
+- Sélectionnez votre fichier `.wpress` et lancez l'importation.
+- Une fois terminé, reconnectez-vous à WordPress et vérifiez l'apparence du site.
+
+### 4. Dernières étapes
+L'importation de cette sauvegarde remplace des éléments de la base de données: 
+- Se connecter avec les identifiants par défaut.
+- Recréer son utilisateur administrateur.
+- Reconfigurer les paramètres de WordPress.
+
+## Arrêt et suppression des services
+Si vous souhaitez arrêter WordPress et MariaDB :
+```bash
+docker compose down
+```
+Les données seront conservées dans les volumes Docker et pourront être restaurées lors du prochain démarrage.
+
+## Conclusion
+Vous avez maintenant un environnement WordPress opérationnel sur votre serveur, avec la possibilité d'importer et d'exporter facilement du contenu grâce à `All-in-One WP Migration and Backup`.
 
