@@ -62,3 +62,4 @@ sudo rm -rf db_data wordpress_data
 
 ## Conclusion
 Vous avez maintenant un environnement WordPress opérationnel sur votre serveur, avec la possibilité d'importer et d'exporter facilement du contenu grâce à `All-in-One WP Migration and Backup`.# dentist4
+# dentist4
