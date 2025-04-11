@@ -48,7 +48,7 @@ L'importation de cette sauvegarde remplace des éléments de la base de données
 - Reconfigurer les paramètres de WordPress (titre du site, adresse, etc.)
 
 ## Arrêt et suppression des services
-Si vous souhaitez arrêter WordPress et MariaDB :
+Si vous souhaitez arrêter WordPress et MariaDB:
 
 ```bash
 docker compose down
